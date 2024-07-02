@@ -1,4 +1,5 @@
 import { test, expect, chromium, Browser, Page } from '@playwright/test';
+import { describe } from 'node:test';
 
 let browser: Browser;
 let page: Page;
@@ -24,8 +25,10 @@ test.afterAll(async () => {
     await browser.close();
 });
 
-test("login test", async () => {
-    await page.goto('https://demoqa.com/login'); //setting wait time for 60 seconds did not work in this case await page.goto('https://demoqa.com/login', { timeout: 120000 }); //setting wait time for 60 seconds
-    const title = await page.title();
-    expect(title).toBe("DEMOQA");
+describe('login functionalities', async () => {
+    test("Page loads", async () => {
+        await page.goto('https://demoqa.com/login'); //setting wait time for 60 seconds did not work in this case await page.goto('https://demoqa.com/login', { timeout: 120000 }); //setting wait time for 60 seconds
+        const title = await page.title();
+        expect(title).toBe("DEMOQA");
+    });
 });
