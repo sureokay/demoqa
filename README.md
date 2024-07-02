@@ -1,4 +1,5 @@
 We need to ensure we have latest node, playwright, npm, vscode and applitools. With minimum version limit as follows
+
     - Playwright v1.35.1
     - Node v20.3.0
     - npm v9.6.5
