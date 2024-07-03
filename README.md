@@ -1,3 +1,5 @@
+[![Playwright Tests](https://github.com/sureokay/demoqa/actions/workflows/playwright.yml/badge.svg)](https://github.com/sureokay/demoqa/actions/workflows/playwright.yml)
+
 We need to ensure we have latest node, playwright, npm, vscode and applitools. With minimum version limit as follows
 
 - Playwright v1.35.1
