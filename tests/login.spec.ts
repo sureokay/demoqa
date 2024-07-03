@@ -1,16 +1,11 @@
 import { test, expect, chromium, Browser, Page } from '@playwright/test';
 import { maximizeWindow } from '../utils/utils';  // Adjust the path as necessary
+import { LoginPage } from '../pages/loginPage';
 import { describe } from 'node:test';
+import dotenv from 'dotenv';
 
-class LoginPage {
-    constructor(private page: Page) {}
-    async open() {
-        await this.page.goto("https://demoqa.com/login");
-    }
-    async getTitle() {
-        return await this.page.title();
-    }
-}
+// Load environment variables from .env file
+dotenv.config();
 
 let browser: Browser;
 let page: Page;
@@ -32,12 +27,20 @@ test.afterAll(async () => {
 });
 
 describe('login functionalities', () => {
-    test.only("Page loads", async () => {
+    test("Page loads", async () => {
         const title = await loginPage.getTitle();
         expect(title).toBe("DEMOQA");
     });
     
     test("Successful login", async () => {
-        // Implement login functionality test here
+        // Use the login method from the LoginPage class
+        const username = process.env.APP_USERNAME;
+        const password = process.env.APP_PASSWORD;
+
+        await loginPage.login(username!, password!);
+
+        // Check for the username value
+        const usernameValue = await loginPage.getUsernameValue();
+        expect(usernameValue).toBe('bdesai');
     });
 });
