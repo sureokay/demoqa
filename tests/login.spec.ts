@@ -1,16 +1,7 @@
 import { test, expect, chromium, Browser, Page } from '@playwright/test';
 import { maximizeWindow } from '../utils/utils';  // Adjust the path as necessary
+import { LoginPage } from '../pages/loginPage';
 import { describe } from 'node:test';
-
-class LoginPage {
-    constructor(private page: Page) {}
-    async open() {
-        await this.page.goto("https://demoqa.com/login");
-    }
-    async getTitle() {
-        return await this.page.title();
-    }
-}
 
 let browser: Browser;
 let page: Page;
@@ -32,7 +23,7 @@ test.afterAll(async () => {
 });
 
 describe('login functionalities', () => {
-    test.only("Page loads", async () => {
+    test("Page loads", async () => {
         const title = await loginPage.getTitle();
         expect(title).toBe("DEMOQA");
     });
