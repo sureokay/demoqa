@@ -28,6 +28,12 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install
 
+      - name: Set up Environment Variables
+        env:
+          APP_USERNAME: ${{ secrets.APP_USERNAME }}
+          APP_PASSWORD: ${{ secrets.APP_PASSWORD }}
+        run: echo "APP_USERNAME=$APP_USERNAME" >> .env && echo "APP_PASSWORD=$APP_PASSWORD" >> .env
+
       - name: Run Playwright tests
         run: xvfb-run --auto-servernum npx playwright test
 
