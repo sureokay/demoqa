@@ -26,8 +26,8 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y \
-            libwoff2-3 \
-            libx264-160
+            libwoff2-2 \
+            libx264-155
 
       - name: Install Playwright Browsers
         run: npx playwright install
