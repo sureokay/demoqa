@@ -26,17 +26,8 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y \
-            libwoff2-1.0-0 \
-            libx264-155
-
-          # Install GStreamer and related libraries from a PPA
-          sudo add-apt-repository -y ppa:jonathonf/gstreamer
-          sudo apt-get update
-          sudo apt-get install -y \
-            libgstreamer1.0-0 libgstreamer-plugins-base1.0-0 \
-            gstreamer1.0-plugins-base gstreamer1.0-plugins-good \
-            gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly \
-            gstreamer1.0-libav
+            libwoff2-3 \
+            libx264-160
 
       - name: Install Playwright Browsers
         run: npx playwright install
