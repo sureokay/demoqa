@@ -26,8 +26,16 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y \
-            libwoff2-2 \
-            libx264-155
+            libwoff2-3 \
+            libx264-160 \
+            wget
+
+          # Manually install libx264-160 if not available
+          if ! dpkg -s libx264-160; then
+            wget http://ftp.debian.org/debian/pool/main/x/x264/libx264-160_0.160.3011+g440b0f1-2_amd64.deb
+            sudo dpkg -i libx264-160_0.160.3011+g440b0f1-2_amd64.deb
+            sudo apt-get install -f
+          fi
 
       - name: Install Playwright Browsers
         run: npx playwright install
