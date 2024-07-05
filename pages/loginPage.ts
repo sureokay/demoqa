@@ -1,4 +1,4 @@
-import { expect, Page } from "@playwright/test";
+import { expect, Page } from '@playwright/test';
 
 export class LoginPage {
     constructor(private page: Page) {}
@@ -11,42 +11,22 @@ export class LoginPage {
         return await this.page.title();
     }
 
-    async enterUsername(username: string) {
-        const usernameInput = this.page.locator('#userName');
-        await usernameInput.fill(username);
-    }
-
-    async enterPassword(password: string) {
-        const passwordInput = this.page.locator('#password');
-        await passwordInput.fill(password);
-    }
-
-    async clickLoginButton() {
-        const loginButton = this.page.locator('#login');
-        await loginButton.click();
-    }
-
     async login(username: string, password: string) {
-        await this.enterUsername(username);
-        await this.enterPassword(password);
-        await this.clickLoginButton();
-    }
+        const usernameInput = this.page.locator('#userName');
+        const passwordInput = this.page.locator('#password');
+        const loginButton = this.page.locator('#login');
 
-    async getSuccessMessage() {
-        return this.page.locator('.success-message');
+        await usernameInput.fill(username);
+        await passwordInput.fill(password);
+        await loginButton.click();
     }
 
     async getUsernameValue() {
         return await this.page.locator('#userName-value').innerText();
     }
 
-    async getErrorMessage(){
-        const errorMessage = this.page.locator("#name");
-        return await errorMessage.textContent();
-    }
-    
     async checkInvalidCredentials() {
-        const errorMessage = await this.getErrorMessage();
-        expect(errorMessage).toBe("Invalid username or password!");
+        const errorMessage = this.page.locator('#name');
+        await expect(errorMessage).toHaveText('Invalid username or password!');
     }
 }
