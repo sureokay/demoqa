@@ -1,4 +1,4 @@
-import { Page } from "@playwright/test";
+import { expect, Page } from "@playwright/test";
 
 export class LoginPage {
     constructor(private page: Page) {}
@@ -38,5 +38,15 @@ export class LoginPage {
 
     async getUsernameValue() {
         return await this.page.locator('#userName-value').innerText();
+    }
+
+    async getErrorMessage(){
+        const errorMessage = this.page.locator("#name");
+        return await errorMessage.textContent();
+    }
+    
+    async checkInvalidCredentials() {
+        const errorMessage = await this.getErrorMessage();
+        expect(errorMessage).toBe("Invalid username or password!");
     }
 }
