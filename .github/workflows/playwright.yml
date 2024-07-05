@@ -26,12 +26,12 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y \
-            libwoff2-3 \
-            libx264-160 \
+            libwoff2-dev \
+            libx264-dev \
             wget
 
-          # Manually install libx264-160 if not available
-          if ! dpkg -s libx264-160; then
+          # Manually install libx264 if not available
+          if ! dpkg -s libx264-dev; then
             wget http://ftp.debian.org/debian/pool/main/x/x264/libx264-160_0.160.3011+g440b0f1-2_amd64.deb
             sudo dpkg -i libx264-160_0.160.3011+g440b0f1-2_amd64.deb
             sudo apt-get install -f
