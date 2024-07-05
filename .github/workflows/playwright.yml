@@ -22,20 +22,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Install necessary system libraries for Playwright
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            libwoff2-dev \
-            libx264-dev \
-            wget
-
-          # Manually install libx264 if not available
-          if ! dpkg -s libx264-dev; then
-            wget http://ftp.debian.org/debian/pool/main/x/x264/libx264-160_0.160.3011+g440b0f1-2_amd64.deb
-            sudo dpkg -i libx264-160_0.160.3011+g440b0f1-2_amd64.deb
-            sudo apt-get install -f
-          fi
+      - name: Install XVFB
+        run: sudo apt-get install xvfb
 
       - name: Install Playwright Browsers
         run: npx playwright install
@@ -47,7 +35,7 @@ jobs:
         run: echo "APP_USERNAME=$APP_USERNAME" >> .env && echo "APP_PASSWORD=$APP_PASSWORD" >> .env
 
       - name: Run Playwright tests
-        run: npx playwright test
+        run: xvfb-run --auto-servernum npx playwright test
 
       - name: Upload Playwright report
         uses: actions/upload-artifact@v2
