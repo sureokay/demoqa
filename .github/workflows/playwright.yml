@@ -26,7 +26,7 @@ jobs:
         run: sudo apt-get install xvfb
 
       - name: Install Playwright Browsers
-        run: npx playwright install
+        run: npx playwright@latest install --with-deps
 
       - name: Set up Environment Variables
         env:
