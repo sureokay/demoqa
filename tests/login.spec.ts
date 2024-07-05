@@ -54,7 +54,7 @@ describe('login functionalities', () => {
         await loginPage.checkInvalidCredentials();
 
     });
-    test.only(`Login failed - invalid password`, async () => {
+    test(`Login failed - invalid password`, async () => {
         const username = process.env.APP_USERNAME;
         const invalidPassword = userdata.invalidPassword;
 
