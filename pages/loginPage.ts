@@ -1,4 +1,5 @@
 import { expect, Page } from '@playwright/test';
+import messages from '../utils/messages';
 
 export class LoginPage {
     constructor(private page: Page) {}
@@ -27,6 +28,6 @@ export class LoginPage {
 
     async checkInvalidCredentials() {
         const errorMessage = this.page.locator('#name');
-        await expect(errorMessage).toHaveText('Invalid username or password!');
+        await expect(errorMessage).toHaveText(messages.login.invalid);
     }
 }
