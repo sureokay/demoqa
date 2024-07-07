@@ -1,8 +1,21 @@
-import { expect, Page } from '@playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
 import messages from '../utils/messages';
 
 export class LoginPage {
-    constructor(private page: Page) {}
+    
+    readonly page: Page;
+    readonly usernameInput: Locator;
+    readonly passwordInput: Locator;
+    readonly loginButton: Locator;
+    readonly errorMessage: Locator;
+
+    constructor(page: Page) {
+        this.page = page;
+        this.loginButton = page.getByRole('button', { name: 'Login' });
+        this.errorMessage = page.locator('#name');
+        this.usernameInput = page.getByPlaceholder("UserName");
+        this.passwordInput = page.getByPlaceholder("Password");
+    }
 
     async open() {
         await this.page.goto("https://demoqa.com/login");
@@ -13,13 +26,9 @@ export class LoginPage {
     }
 
     async login(username: string, password: string) {
-        const usernameInput = this.page.locator('#userName');
-        const passwordInput = this.page.locator('#password');
-        const loginButton = this.page.locator('#login');
-
-        await usernameInput.fill(username);
-        await passwordInput.fill(password);
-        await loginButton.click();
+        await this.usernameInput.fill(username);
+        await this.passwordInput.fill(password);
+        await this.loginButton.click();
     }
 
     async getUsernameValue() {
@@ -27,7 +36,7 @@ export class LoginPage {
     }
 
     async checkInvalidCredentials() {
-        const errorMessage = this.page.locator('#name');
-        await expect(errorMessage).toHaveText(messages.login.invalid);
+        //const errorMessage = this.page.locator('#name');
+        await expect(this.errorMessage).toHaveText(messages.login.invalid);
     }
 }
