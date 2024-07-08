@@ -2,7 +2,6 @@ import { expect, Locator, Page } from '@playwright/test';
 import messages from '../utils/messages';
 
 export class LoginPage {
-    
     readonly page: Page;
     readonly usernameInput: Locator;
     readonly passwordInput: Locator;
@@ -13,21 +12,27 @@ export class LoginPage {
         this.page = page;
         this.loginButton = page.getByRole('button', { name: 'Login' });
         this.errorMessage = page.locator('#name');
-        this.usernameInput = page.getByPlaceholder("UserName");
-        this.passwordInput = page.getByPlaceholder("Password");
-    }
-
-    async open() {
-        await this.page.goto("https://demoqa.com/login");
+        this.usernameInput = page.getByPlaceholder('UserName');
+        this.passwordInput = page.getByPlaceholder('Password');
     }
 
     async getTitle() {
         return await this.page.title();
     }
 
-    async login(username: string, password: string) {
+    async fillUsername(username: string) {
+        //await this.usernameInput.waitFor({ state: 'visible', timeout: 100000 });
         await this.usernameInput.fill(username);
+    }
+
+    async fillPassword(password: string) {
+        //await this.passwordInput.waitFor({ state: 'visible', timeout: 100000 });
         await this.passwordInput.fill(password);
+    }
+
+    async login(username: string, password: string) {
+        await this.fillUsername(username);
+        await this.fillPassword(password);
         await this.loginButton.click();
     }
 
@@ -36,7 +41,6 @@ export class LoginPage {
     }
 
     async checkInvalidCredentials() {
-        //const errorMessage = this.page.locator('#name');
         await expect(this.errorMessage).toHaveText(messages.login.invalid);
     }
 }

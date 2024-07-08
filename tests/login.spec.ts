@@ -1,7 +1,8 @@
 import { test, expect, chromium, Browser, Page } from '@playwright/test';
-import { maximizeWindow } from '../utils/utils';  // Adjust the path as necessary
+//import { maximizeWindow } from '../utils/utils';  // Adjust the path as necessary
 import { LoginPage } from '../pages/loginPage';
 import userData from '../data/userdata';
+import pages from '../utils/pages';
 import dotenv from 'dotenv';
 
 // Load environment variables from .env file
@@ -17,7 +18,7 @@ test.use({ storageState: { cookies: [], origins: [] } }); // doesn't share the l
 test.describe.configure({ mode: 'serial' });
 
 test.beforeEach(async ({ page }) => {
-    await page.goto('https://demoqa.com/login');
+    await page.goto(pages.loginPage);
     loginPage = new LoginPage(page);
 });
 
