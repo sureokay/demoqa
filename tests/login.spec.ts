@@ -18,7 +18,7 @@ test.use({ storageState: { cookies: [], origins: [] } }); // doesn't share the l
 test.describe.configure({ mode: 'serial' });
 
 test.beforeEach(async ({ page }) => {
-    await page.goto(pages.loginPage);
+    await page.goto(pages.loginPage, { waitUntil: 'domcontentloaded', timeout: 60000 });
     loginPage = new LoginPage(page);
 });
 
