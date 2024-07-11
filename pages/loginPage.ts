@@ -21,12 +21,10 @@ export class LoginPage {
     }
 
     async fillUsername(username: string) {
-        //await this.usernameInput.waitFor({ state: 'visible', timeout: 100000 });
         await this.usernameInput.fill(username);
     }
 
     async fillPassword(password: string) {
-        //await this.passwordInput.waitFor({ state: 'visible', timeout: 100000 });
         await this.passwordInput.fill(password);
     }
 
