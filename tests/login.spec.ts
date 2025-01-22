@@ -1,5 +1,4 @@
 import { test, expect, chromium, Browser, Page } from '@playwright/test';
-//import { maximizeWindow } from '../utils/utils';  // Adjust the path as necessary
 import { LoginPage } from '../pages/loginPage';
 import userData from '../data/userdata';
 import pages from '../utils/pages';

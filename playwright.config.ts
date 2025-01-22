@@ -88,5 +88,5 @@ export default defineConfig({
   //   url: 'http://127.0.0.1:3000',
   //   reuseExistingServer: !process.env.CI,
   // },
-  //timeout: 60000, // Global test timeout
+  //timeout: 120000, // Global test timeout
 });
